@@ -31,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // ROUTE: /api/build/
 // ------------------------------------------------------------------------
 Route::get('build', function() {
-    return Build::all();
+    return Build::count();
 });
 
 Route::post('build', function(Request $req) {
@@ -64,7 +64,7 @@ Route::get('part/cooler', function() {
     return Cooler::all();
 });
 
-Route::post('part/cooler', function() {
+Route::post('part/cooler', function(Request $req) {
     return Cooler::create($req->all());
 });
 
@@ -72,7 +72,12 @@ Route::post('part/cooler', function() {
 // ROUTE: /api/part/cooler/{id}
 // ------------------------------------------------------------------------
 Route::get('part/cooler/{id}', function($id) {
-    return Cooler::find($id);
+    $part = Cooler::find($id);
+    if(!$part) {
+        return response()->json(['error' => 'Part Not Found', 'requested_id' => $id], 404);
+    } else {
+        return response($part);
+    }
 });
 
 Route::put('part/cooler/{id}', function(Request $req, $id) {

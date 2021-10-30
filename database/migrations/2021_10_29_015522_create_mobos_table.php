@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMoboTable extends Migration
+class CreateMobosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMoboTable extends Migration
      */
     public function up()
     {
-        Schema::create('mobo', function (Blueprint $table) {
+        Schema::create('mobos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('build_id')
                 ->constrained('builds')
@@ -35,6 +35,6 @@ class CreateMoboTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobo');
+        Schema::dropIfExists('mobos');
     }
 }

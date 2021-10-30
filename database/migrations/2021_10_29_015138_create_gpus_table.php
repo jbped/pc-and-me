@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCpuTable extends Migration
+class CreateGpusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateCpuTable extends Migration
      */
     public function up()
     {
-        Schema::create('cpu', function (Blueprint $table) {
+        Schema::create('gpus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('build_id')
                 ->constrained('builds')
                 ->onDelete('cascade');
-            $table->string('manufacturer'); // AMD v Intel
-            $table->string('model'); // R9 5600, I9 11900K
+            $table->string('manufacturer'); // AMD v nVidia (v Intel "Soon")
+            $table->string('gpu_type'); // RTX 3090, RX 6900XT, etc
+            $table->string('brand'); // Gigabyte, EVGA, MSI, ASUS, etc.
+            $table->string('model'); // TUF Gaming OC, FTW3, Phantom Gaming, etc
             $table->boolean('overclocked')->default(false);
-            $table->integer('core_ratio')->nullable();
             $table->integer('core_voltage')->nullable();
-            $table->integer('cache_ratio')->nullable();
-            $table->integer('cache_voltage')->nullable();
+            $table->integer('power_limit')->nullable();
+            $table->integer('core_clock')->nullable();
+            $table->integer('memory_clock')->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +38,6 @@ class CreateCpuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cpu');
+        Schema::dropIfExists('gpus');
     }
 }

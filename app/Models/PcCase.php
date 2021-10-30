@@ -10,4 +10,5 @@ class PcCase extends Model
     use HasFactory;
 
     protected $table = 'case';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

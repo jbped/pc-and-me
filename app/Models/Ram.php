@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ram extends Model
 {
     use HasFactory;
+    protected $table = 'ram';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }
