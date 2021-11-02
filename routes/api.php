@@ -3,14 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Build;
-use App\Models\Cooler;
-use App\Models\Cpu;
-use App\Models\Gpu;
-use App\Models\Mobo;
-use App\Models\PcCase;
-use App\Models\Psu;
-use App\Models\Ram;
-use App\Models\Storage;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +92,7 @@ Route::get('part/cpu', function() {
     return Cpu::all();
 });
 
-Route::post('part/cpu', function() {
+Route::post('part/cpu', function(Request $req) {
     return Cpu::create($req->all());
 });
 
@@ -107,7 +100,12 @@ Route::post('part/cpu', function() {
 // ROUTE: /api/part/cpu/{id}
 // ------------------------------------------------------------------------
 Route::get('part/cpu/{id}', function($id) {
-    return Cpu::find($id);
+    $part = Cpu::find($id);
+    if(!$part) {
+        return response()->json(['error' => 'Part Not Found', 'requested_id' => $id], 404);
+    } else {
+        return response($part);
+    }
 });
 
 Route::put('part/cpu/{id}', function(Request $req, $id) {
@@ -301,193 +299,3 @@ Route::delete('part/storage/{id}', function($id) {
     $part->delete();
     return 204;
 });
-
-/*
-// ROUTE: /api/part/{type}
-Route::get('part/{type}', function($type) {
-    switch($type) {
-        case 'cpu':
-            return Cpu::all();
-            break;
-        case 'gpu':
-            return Gpu::all();
-            break;
-        case 'mobo':
-            return Mobo::all();
-            break;
-        case 'ram':
-            return Ram::all();
-            break;
-        case 'psu':
-            return Psu::all();
-            break;
-        case 'cooler': 
-            return Cooler::all();
-            break;
-        case 'case':
-            return PcCase::all();
-            break;
-        case 'storage':
-            return Storage::all();
-            break;
-        default:
-            return 400;
-    }
-});
-
-Route::post('part/{type}', function(Request $req, $type) {
-    switch($type) {
-        case 'cpu':
-            return Cpu::create($req->all());
-            break;
-        case 'gpu':
-            return Gpu::create($req->all());
-            break;
-        case 'mobo':
-            return Mobo::create($req->all());
-            break;
-        case 'ram':
-            return Ram::create($req->all());
-            break;
-        case 'psu':
-            return Psu::create($req->all());
-            break;
-        case 'cooler': 
-            return Cooler::create($req->all());
-            break;
-        case 'case':
-            return PcCase::create($req->all());
-            break;
-        case 'storage':
-            return Storage::create($req->all());
-            break;
-        default:
-            return 400;
-    }
-});
-
-// ROUTE: /api/part/{type}/{id}
-Route::get('part/{type}/{id}', function($type, $id) {
-    switch($type) {
-        case 'cpu':
-            return Cpu::find($id);
-            break;
-        case 'gpu':
-            return Gpu::find($id);
-            break;
-        case 'mobo':
-            return Mobo::find($id);
-            break;
-        case 'ram':
-            return Ram::find($id);
-            break;
-        case 'psu':
-            return Psu::find($id);
-            break;
-        case 'cooler': 
-            return Cooler::find($id);
-            break;
-        case 'case':
-            return PcCase::find($id);
-            break;
-        case 'storage':
-            return Storage::find($id);
-            break;
-        default:
-            return 400;
-    }
-});
-
-Route::put('part/{type}/{id}', function($type, $id) {
-    switch($type) {
-        case 'cpu':
-            $part = Cpu::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        case 'gpu':
-            $part = Gpu::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        case 'mobo':
-            $part = Mobo::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        case 'ram':
-            $part = Ram::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        case 'psu':
-            $part = Psu::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        case 'cooler': 
-            $part = Cooler::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        case 'case':
-            $part = PcCase::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        case 'storage':
-            $part = Storage::findOrFail($id);
-            $part->update($req->all());
-            return $part;
-            break;
-        default:
-            return 400;
-    }
-});
-
-Route::delete('part/{type}/{id}', function($type, $id) {
-    switch($type) {
-        case 'cpu':
-            $part = Cpu::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        case 'gpu':
-            $part = Gpu::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        case 'mobo':
-            $part = Mobo::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        case 'ram':
-            $part = Ram::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        case 'psu':
-            $part = Psu::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        case 'cooler': 
-            $part = Cooler::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        case 'case':
-            $part = PcCase::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        case 'storage':
-            $part = Storage::findOrFail($id);
-            $part->delete();
-            return 204;
-            break;
-        default:
-            return 400;
-    }
-});*/
