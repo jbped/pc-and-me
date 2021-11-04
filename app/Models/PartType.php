@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PartType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'type_short',
+        'type_long'
+    ];
 }

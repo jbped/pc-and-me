@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Build;
 
 class BuildController extends Controller
 {
@@ -14,6 +15,12 @@ class BuildController extends Controller
     public function index()
     {
         //
+        $builds = Build::all();
+        $buildsCount = count($builds);
+        return response([
+            'count' => $buildsCount,
+            'builds' => $builds
+        ]);
     }
 
     /**
@@ -24,6 +31,7 @@ class BuildController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -35,6 +43,8 @@ class BuildController extends Controller
     public function store(Request $request)
     {
         //
+        $build = Build::create($request->all());
+        return $build;
     }
 
     /**
@@ -46,6 +56,12 @@ class BuildController extends Controller
     public function show($id)
     {
         //
+        $build = Build::find($id);
+        if (!$build) {
+            return response()->json(['error' => 'Build Not Found', 'requested_id' => $id], 404);
+        }
+
+        return response($build);
     }
 
     /**
@@ -69,6 +85,14 @@ class BuildController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $build = Build::find($id);
+
+        if (!$build) {
+            return response()->json(['error' => 'Build Not Found', 'requested_id' => $id], 404);
+        }
+
+        $build->update($request->all());
+        return $build;
     }
 
     /**
@@ -80,5 +104,13 @@ class BuildController extends Controller
     public function destroy($id)
     {
         //
+        $build = Build::findOrFind($id);
+
+        if (!$build) {
+            return response()->json(['error' => 'Build Not Found', 'requested_id' => $id], 404);
+        }
+
+        $build->delete();
+        return response(204);
     }
 }

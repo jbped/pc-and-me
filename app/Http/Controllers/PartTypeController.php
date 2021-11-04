@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PartType;
 
 class PartTypeController extends Controller
 {
@@ -14,8 +15,9 @@ class PartTypeController extends Controller
     public function index()
     {
         //
+        $type = PartType::all();
+        return $type;
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -35,6 +37,7 @@ class PartTypeController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -69,6 +72,12 @@ class PartTypeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $type = PartType::find($id);
+        if (!$type) {
+            return response()->json(['error' => 'Part Type Not Found', 'requested_id' => $id], 404);
+        }
+        $type->update($request->all());
+        return $type;
     }
 
     /**
@@ -80,5 +89,11 @@ class PartTypeController extends Controller
     public function destroy($id)
     {
         //
+        $type = PartType::find($id);
+        if (!$type) {
+            return response()->json(['error' => 'Part Type Not Found', 'requested_id' => $id], 404);
+        }
+        $type->delete();
+        return response(204);
     }
 }

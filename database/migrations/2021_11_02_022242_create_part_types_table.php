@@ -15,8 +15,8 @@ class CreatePartTypesTable extends Migration
     {
         Schema::create('part_types', function (Blueprint $table) {
             $table->id();
-            $table->string('type_short'); // Ex. GPU
-            $table->string('type_long'); // Ex. Graphics Processing Unit or Graphics Card
+            $table->string('type_short', 6); // Ex. GPU
+            $table->string('type_long', 50); // Ex. Graphics Processing Unit or Graphics Card
             $table->timestamps();
         });
     }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PartSpec extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'part_type_id',
+        'name',
+        'data_type',
+        'details'
+    ];
 }

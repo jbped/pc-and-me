@@ -15,11 +15,12 @@ class CreatePartSpecsTable extends Migration
     {
         Schema::create('part_specs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('part_type_id');
+            $table->foreignId('part_type_id')
+                ->constrained();
             $table->string('name');
             $table->string('data_type'); // integer, string, text, boolean
-            $table->string('details')
-                ->nullable();
+            $table->string('details') // Help text to better understand the spec
+            ->nullable();
             $table->timestamps();
         });
     }
