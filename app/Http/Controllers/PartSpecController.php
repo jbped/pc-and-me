@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PartSpec;
 
 class PartSpecController extends Controller
 {
@@ -14,16 +15,8 @@ class PartSpecController extends Controller
     public function index()
     {
         //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $specs = PartSpec::all();
+        return $specs;
     }
 
     /**
@@ -35,6 +28,8 @@ class PartSpecController extends Controller
     public function store(Request $request)
     {
         //
+        $spec = PartSpec::create($request->all());
+        return $spec;
     }
 
     /**
@@ -46,17 +41,7 @@ class PartSpecController extends Controller
     public function show($id)
     {
         //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

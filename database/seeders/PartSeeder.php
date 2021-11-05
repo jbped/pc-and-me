@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class PartSeeder extends Seeder
 {
@@ -14,5 +16,6 @@ class PartSeeder extends Seeder
     public function run()
     {
         //
+
     }
 }

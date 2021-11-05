@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Part;
 
 class PartController extends Controller
 {
@@ -14,16 +15,8 @@ class PartController extends Controller
     public function index()
     {
         //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $parts = Part::all();
+        return $parts;
     }
 
     /**
@@ -35,6 +28,8 @@ class PartController extends Controller
     public function store(Request $request)
     {
         //
+        $part = Part::create($request->all());
+        return $part;
     }
 
     /**
@@ -46,17 +41,14 @@ class PartController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $part = Part::find($id);
+        if (!$part) {
+            return response()->json([
+                'error' => 'Part not Found',
+                'requested_part' => $id
+            ], 404);
+        }
+        return $part;
     }
 
     /**
@@ -69,6 +61,15 @@ class PartController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $part = Part::find($id);
+        if (!$part) {
+            return response()->json([
+                'error' => 'Part not Found',
+                'requested_part' => $id
+            ], 404);
+        }
+        $part->update($request->all());
+        return $part;
     }
 
     /**
@@ -80,5 +81,14 @@ class PartController extends Controller
     public function destroy($id)
     {
         //
+        $part = Part::find($id);
+        if (!$part) {
+            return response()->json([
+                'error' => 'Part not Found',
+                'requested_part' => $id
+            ], 404);
+        }
+        $part->delete();
+        return response()->json('response content', 204);
     }
 }

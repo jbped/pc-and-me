@@ -15,23 +15,12 @@ class BuildController extends Controller
     public function index()
     {
         //
-        $builds = Build::all();
+        $builds = Build::all()->sortByDesc('created_at');
         $buildsCount = count($builds);
         return response([
             'count' => $buildsCount,
             'builds' => $builds
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
     }
 
     /**
@@ -56,23 +45,18 @@ class BuildController extends Controller
     public function show($id)
     {
         //
-        $build = Build::find($id);
+        $build = Build::with([
+            'parts',
+            'parts.specValues'
+        ])
+            ->where('id', $id)
+            ->get();
+
         if (!$build) {
             return response()->json(['error' => 'Build Not Found', 'requested_id' => $id], 404);
         }
 
         return response($build);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -104,13 +88,13 @@ class BuildController extends Controller
     public function destroy($id)
     {
         //
-        $build = Build::findOrFind($id);
+        $build = Build::find($id);
 
         if (!$build) {
             return response()->json(['error' => 'Build Not Found', 'requested_id' => $id], 404);
         }
 
         $build->delete();
-        return response(204);
+        return response()->json('response content', 204);
     }
 }

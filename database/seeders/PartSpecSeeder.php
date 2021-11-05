@@ -14,5 +14,6 @@ class PartSpecSeeder extends Seeder
     public function run()
     {
         //
+
     }
 }

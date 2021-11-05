@@ -20,7 +20,7 @@ class CreatePartSpecsTable extends Migration
             $table->string('name');
             $table->string('data_type'); // integer, string, text, boolean
             $table->string('details') // Help text to better understand the spec
-            ->nullable();
+                ->nullable();
             $table->timestamps();
         });
     }

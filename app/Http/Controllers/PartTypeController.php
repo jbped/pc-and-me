@@ -15,17 +15,8 @@ class PartTypeController extends Controller
     public function index()
     {
         //
-        $type = PartType::all();
-        return $type;
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $types = PartType::all()->sortBy('type_short');
+        return $types;
     }
 
     /**
@@ -37,7 +28,8 @@ class PartTypeController extends Controller
     public function store(Request $request)
     {
         //
-
+        $type = PartType::create($request);
+        return $type;
     }
 
     /**
@@ -46,20 +38,28 @@ class PartTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type)
     {
         //
+        $type = PartType::where('type_short', $type)->first();
+        if (!$type) {
+            return response()->json(['error' => 'Type Not Found', 'requested_id' => $type]);
+        }
+
+        return $type;
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Display all part specs associated with declared type
      */
-    public function edit($id)
+    public function getSpecTypes($partType)
     {
-        //
+        $type = PartType::with('typeSpecs')->where('type_short', $partType)->get();
+        if (!$type) {
+            return response()->json(['error' => 'Type Not Found', 'requested_id' => $type]);
+        }
+
+        return $type;
     }
 
     /**

@@ -37,9 +37,9 @@ Route::group(['prefix' => 'build'], function () {
     Route::get('/{id}/part', [BuildPartController::class, 'index']); // Show all parts associated with build
     Route::post('/{id}/part', [BuildPartController::class, 'store']); // Add new part to build
 
-    Route::get('/{id}/part/{partId}', [BuildPartController::class, 'show']); // Show select build part by id
-    Route::put('/{id}/part/{partId}', [BuildPartController::class, 'update']); // Update build part by id
-    Route::delete('/{id}/part/{partId}', [BuildPartController::class, 'destroy']); // Delete build part from build
+    Route::get('/part/{id}', [BuildPartController::class, 'show']); // Show select build part by id
+    Route::put('/part/{id}', [BuildPartController::class, 'update']); // Update build part by id
+    Route::delete('/part/{id}', [BuildPartController::class, 'destroy']); // Delete build part from build
 });
 
 Route::group(['prefix' => 'component'], function () {
@@ -50,15 +50,15 @@ Route::group(['prefix' => 'component'], function () {
     Route::get('/{type}', [PartTypeController::class, 'show']); // Show all parts of provided type ({type} =  part_types table type_short value)
     Route::post('/{type}', [PartController::class, 'store']); // Create new part of selected type
 
-    Route::get('/{partId}', [PartController::class, 'show']); // Show part by id
-    Route::put('/{partId}', [PartController::class, 'update']); // Update part by id
-    Route::delete('/{partId}', [PartController::class, 'destroy']); // Delete part by id
+    Route::get('/{id}', [PartController::class, 'show']); // Show part by id
+    Route::put('/{id}', [PartController::class, 'update']); // Update part by id
+    Route::delete('/{id}', [PartController::class, 'destroy']); // Delete part by id
 
 });
 
 Route::group(['prefix' => 'spec'], function () {
     Route::get('/', [PartSpecController::class, 'index']); // Get all spec types
-    Route::get('/{partType}', [PartSpecController::class, 'index']); // Get all spec types of provided part type
+    Route::get('/{partType}', [PartTypeController::class, 'show']); // Get all spec types of provided part type
     Route::post('/{partType}', [PartSpecController::class, 'store']); // Create new spec type for provided part type
 
     Route::get('/{partType}/{specType}', [PartSpecValueController::class, 'show']); // Get all spec values for provided part->spec type

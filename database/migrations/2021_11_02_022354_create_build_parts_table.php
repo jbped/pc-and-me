@@ -18,8 +18,6 @@ class CreateBuildPartsTable extends Migration
             $table->foreignId('build_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->foreignId('part_type_id')
-                ->constrained();
             $table->foreignId('part_id')
                 ->constrained();
             $table->text('description')

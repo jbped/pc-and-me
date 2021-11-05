@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Part;
 
 class PartSpecValue extends Model
 {
@@ -18,4 +19,9 @@ class PartSpecValue extends Model
         'text_value',
         'boolean_value',
     ];
+
+    public function part()
+    {
+        return $this->belongsTo(Part::class);
+    }
 }
