@@ -16,6 +16,12 @@ class PartSeeder extends Seeder
     public function run()
     {
         //
-
+        DB::table('parts')->upsert([
+            [
+                'part_type_id' => 0,
+                'manufacturer' => 'CompanyName',
+                'product_name' => 'ProductName'
+            ]
+        ], ['part_type_id', 'product_name'], ['manufacturer']);
     }
 }
