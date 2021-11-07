@@ -84,12 +84,6 @@ class PartSpecSeeder extends Seeder
             ],
             [
                 'part_type_id' => 3,
-                'name' => 'Physical Core Count',
-                'data_type' => 'int',
-                'details' => 'How many Physical Cores does the CPU have?'
-            ],
-            [
-                'part_type_id' => 3,
                 'name' => 'Thread Count',
                 'data_type' => 'int',
                 'details' => 'How many threads does the CPU have?'
@@ -99,6 +93,12 @@ class PartSpecSeeder extends Seeder
                 'name' => 'Overclock-able',
                 'data_type' => 'boolean',
                 'details' => 'Can the CPU be overclocked?'
+            ],
+            [
+                'part_type_id' => 3,
+                'name' => 'Integrated Graphics',
+                'data_type' => 'boolean',
+                'details' => 'CPU (APU) contains an integrated GPU'
             ],
             [
                 'part_type_id' => 3,
