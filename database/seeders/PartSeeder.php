@@ -50,12 +50,12 @@ class PartSeeder extends Seeder
             [
                 'part_type_id' => 2,
                 'manufacturer' => 'Gen Cooler',
-                'product_name' => 'Generic AMD Air-Cooler'
+                'product_name' => 'Generic Multi Socket CPU Air-Cooler'
             ],
             [
                 'part_type_id' => 2,
                 'manufacturer' => 'AMD',
-                'product_name' => 'Stock Intel Air-Cooler'
+                'product_name' => 'Stock AMD Air-Cooler'
             ],
             [
                 'part_type_id' => 2,
@@ -105,17 +105,17 @@ class PartSeeder extends Seeder
             [
                 'part_type_id' => 3,
                 'manufacturer' => 'AMD',
-                'product_name' => '5700X'
-            ],
-            [
-                'part_type_id' => 3,
-                'manufacturer' => 'AMD',
                 'product_name' => '5800X'
             ],
             [
                 'part_type_id' => 3,
                 'manufacturer' => 'AMD',
                 'product_name' => '5900X'
+            ],
+            [
+                'part_type_id' => 3,
+                'manufacturer' => 'AMD',
+                'product_name' => '5950X'
             ],
             [
                 'part_type_id' => 3,
@@ -149,22 +149,22 @@ class PartSeeder extends Seeder
             ],
             [
                 'part_type_id' => 4,
-                'manufacturer' => 'nVidia',
+                'manufacturer' => 'Nvidia',
                 'product_name' => '3060'
             ],
             [
                 'part_type_id' => 4,
-                'manufacturer' => 'nVidia',
+                'manufacturer' => 'Nvidia',
                 'product_name' => '3070'
             ],
             [
                 'part_type_id' => 4,
-                'manufacturer' => 'nVidia',
+                'manufacturer' => 'Nvidia',
                 'product_name' => '3080'
             ],
             [
                 'part_type_id' => 4,
-                'manufacturer' => 'nVidia',
+                'manufacturer' => 'Nvidia',
                 'product_name' => '3090'
             ],
             [
@@ -181,11 +181,6 @@ class PartSeeder extends Seeder
                 'part_type_id' => 4,
                 'manufacturer' => 'AMD',
                 'product_name' => '6800XT'
-            ],
-            [
-                'part_type_id' => 4,
-                'manufacturer' => 'AMD',
-                'product_name' => '6900XT'
             ],
             [
                 'part_type_id' => 4,
@@ -253,27 +248,27 @@ class PartSeeder extends Seeder
                 'product_name' => 'Trident Z'
             ],
             [
-                'part_type_id' => 7,
+                'part_type_id' => 8,
                 'manufacturer' => 'GenMem',
                 'product_name' => 'Generic 7200 rpm HDD'
             ],
             [
-                'part_type_id' => 7,
+                'part_type_id' => 8,
                 'manufacturer' => 'GenMem',
                 'product_name' => 'Generic 5600 rpm HDD'
             ],
             [
-                'part_type_id' => 7,
+                'part_type_id' => 8,
                 'manufacturer' => 'GenMem',
                 'product_name' => 'Generic 2.5" SSD'
             ],
             [
-                'part_type_id' => 7,
+                'part_type_id' => 8,
                 'manufacturer' => 'GenMem',
                 'product_name' => 'Generic M.2 SSD'
             ],
             [
-                'part_type_id' => 7,
+                'part_type_id' => 8,
                 'manufacturer' => 'GenMem',
                 'product_name' => 'Generic PCIe SSD'
             ],

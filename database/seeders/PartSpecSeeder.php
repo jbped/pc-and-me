@@ -126,15 +126,21 @@ class PartSpecSeeder extends Seeder
             ],
             [
                 'part_type_id' => 4,
-                'name' => 'Memory Type',
+                'name' => 'Bus Type',
                 'data_type' => 'string',
                 'details' => 'GPU Memory type (GDDR5, GDDR6, etc)'
             ],
             [
                 'part_type_id' => 4,
-                'name' => 'Bus Type',
+                'name' => 'Interface',
                 'data_type' => 'string',
                 'details' => 'GPU Bus type (PCIe 4.0 x 16, PCIe 3.0 x 16, etc.)'
+            ],
+            [
+                'part_type_id' => 4,
+                'name' => 'Base Clock',
+                'data_type' => 'int',
+                'details' => 'GPU Base Clock in Megahertz (MHz)'
             ],
             [
                 'part_type_id' => 4,
@@ -254,7 +260,7 @@ class PartSpecSeeder extends Seeder
                 'part_type_id' => 8,
                 'name' => 'Memory Capactiy',
                 'data_type' => 'int',
-                'details' => 'Storage Max Capacity in megabytes (mb)'
+                'details' => 'Storage Max Capacity in gigabytes (gb)'
             ],
             [
                 'part_type_id' => 8,

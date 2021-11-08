@@ -19,7 +19,6 @@ class CreatePartSpecValuesTable extends Migration
                 ->constrained();
             $table->foreignId('part_spec_id')
                 ->constrained();
-            $table->string('data_type');
             $table->integer('int_value')
                 ->nullable();
             $table->string('string_value')

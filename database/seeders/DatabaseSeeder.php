@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PartTypeSeeder::class,
             PartSpecSeeder::class,
-            PartSeeder::class
+            PartSeeder::class,
+            PartSpecValueSeeder::class
         ]);
     }
 }
