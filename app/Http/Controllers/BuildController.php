@@ -17,7 +17,7 @@ class BuildController extends Controller
         //
         $builds = Build::all()->sortByDesc('created_at');
         $buildsCount = count($builds);
-        return response([
+        return response()->json([
             'count' => $buildsCount,
             'builds' => $builds
         ]);

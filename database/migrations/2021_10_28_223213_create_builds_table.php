@@ -17,9 +17,9 @@ class CreateBuildsTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('user_id')
+                ->nullable()
                 ->constrained('users')
-                ->onDelete('cascade')
-                ->nullable();
+                ->onDelete('cascade');
             $table->text('description')->nullable();
             $table->string('operating_system')->nullable();
             $table->timestamps();

@@ -13,12 +13,13 @@ class PartType extends Model
     use HasFactory;
     protected $fillable = [
         'type_short',
-        'type_long'
+        'type_long',
+        'descriptor'
     ];
 
     public function typeSpecs()
     {
-        return $this->hasMany(PartSpec::class);
+        return $this->hasMany(PartSpec::class);;
     }
 
     public function parts()

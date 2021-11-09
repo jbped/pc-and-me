@@ -28,7 +28,7 @@ class PartTypeController extends Controller
     public function store(Request $request)
     {
         //
-        $type = PartType::create($request);
+        $type = PartType::create($request->all());
         return $type;
     }
 
@@ -38,15 +38,22 @@ class PartTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($type)
+    public function show($partType)
     {
         //
-        $type = PartType::where('type_short', $type)->first();
+        $type = PartType::where('type_short', $partType)
+            ->with('parts:id,part_type_id,product_name,manufacturer', 'parts.specValues')
+            ->first();
         if (!$type) {
-            return response()->json(['error' => 'Type Not Found', 'requested_id' => $type]);
+            return response()->json(['error' => 'Type Not Found', 'requested_id' => $partType]);
         }
+        $collection = collect($type)
+            ->prepend(
+                count($type->parts),
+                $partType . '-count'
+            );
 
-        return $type;
+        return $collection;
     }
 
     /**

@@ -2257,7 +2257,7 @@ class PartSpecValueSeeder extends Seeder
                 'boolean_value' => null
             ],
             [
-                'part_id' => 50, // Generic PCIe SSD
+                'part_id' => 51, // Generic PCIe SSD
                 'part_spec_id' => 40, // SSD
                 'int_value' => null,
                 'string_value' =>  null,
@@ -2265,7 +2265,7 @@ class PartSpecValueSeeder extends Seeder
                 'boolean_value' => true
             ],
             [
-                'part_id' => 50, // Generic PCIe SSD
+                'part_id' => 51, // Generic PCIe SSD
                 'part_spec_id' => 41, // Memory Capacity
                 'int_value' => 4096,
                 'string_value' =>  null,
@@ -2273,7 +2273,7 @@ class PartSpecValueSeeder extends Seeder
                 'boolean_value' => null
             ],
             [
-                'part_id' => 50, // Generic PCIe SSD
+                'part_id' => 51, // Generic PCIe SSD
                 'part_spec_id' => 42, // SDD Type
                 'int_value' => null,
                 'string_value' =>  'PCIe',

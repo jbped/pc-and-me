@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Part;
+use App\Models\PartType;
 
 class PartController extends Controller
 {
@@ -15,7 +16,8 @@ class PartController extends Controller
     public function index()
     {
         //
-        $parts = Part::all();
+        $parts = Part::with('partType:id,type_short')
+            ->get();
         return $parts;
     }
 
@@ -25,11 +27,22 @@ class PartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $partType)
     {
         //
-        $part = Part::create($request->all());
-        return $part;
+        $type = PartType::where('type_short', $partType)->select('id')->first();
+
+        $request->part_type_id = $type->id;
+
+        // $part = Part::create($request->all());
+
+        $part = new Part;
+        $part->part_type_id = $type->id;
+        $part->manufacturer = $request->manufacturer;
+        $part->product_name = $request->product_name;
+        return $part->save();
+
+        // return $part;
     }
 
     /**
@@ -41,14 +54,34 @@ class PartController extends Controller
     public function show($id)
     {
         //
-        $part = Part::find($id);
+        $part = Part::with([
+            'partType:id,type_short',
+            'specValues:id,part_id,part_spec_id,int_value,string_value,text_value,boolean_value',
+            'specValues.spec'
+        ])
+            ->where('id', $id)
+            ->first();
+
         if (!$part) {
             return response()->json([
                 'error' => 'Part not Found',
                 'requested_part' => $id
             ], 404);
         }
-        return $part;
+        $type = $part->partType->type_short;
+        $nullRemovedSpecs = $part->specValues->map(function ($spec) {
+            $trimmedSpec = [
+                'part_spec_id' => $spec->part_spec_id,
+                'int_value' => $spec->int_value,
+                'string_value' => $spec->string_value,
+                'text_value' => $spec->text_value,
+                'boolean_value' => $spec->boolean_value
+            ];
+            return removeNullValues($trimmedSpec);
+        });
+        $collection = collect($part)->replace(['part_type' => $type, 'spec_values' => $nullRemovedSpecs]);
+
+        return $collection;
     }
 
     /**
