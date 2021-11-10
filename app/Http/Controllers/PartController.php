@@ -18,7 +18,13 @@ class PartController extends Controller
         //
         $parts = Part::with('partType:id,type_short')
             ->get();
-        return $parts;
+
+        $mapped = $parts->map(function ($part) {
+            $type = $part->partType->type_short;
+            $partType = collect($part);
+            return $partType->replace(['part_type' => $type]);
+        });
+        return $mapped;
     }
 
     /**
@@ -33,8 +39,6 @@ class PartController extends Controller
         $type = PartType::where('type_short', $partType)->select('id')->first();
 
         $request->part_type_id = $type->id;
-
-        // $part = Part::create($request->all());
 
         $part = new Part;
         $part->part_type_id = $type->id;

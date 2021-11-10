@@ -14,14 +14,22 @@ class BuildPartController extends Controller
      */
     public function index($id)
     {
-        $parts = BuildPart::where('build_id', $id)->get();
-        if (!$parts) {
+        $parts = BuildPart::where('build_id', $id)
+            ->with('part:id,part_type_id,manufacturer,product_name')
+            ->get();
+
+        if (!$parts || count($parts) === 0) {
             return response()->json([
-                'error' => 'Build not Found',
-                'requested_id' => $id
+                'error' => 'Build Parts not Found',
+                'requested_build_id' => $id
             ], 404);
         }
-        return $parts;
+
+        $formattedParts = $parts->map(function ($part) {
+            return formatPart($part);
+        });
+
+        return $formattedParts;
     }
 
     /**
@@ -33,9 +41,19 @@ class BuildPartController extends Controller
     public function store(Request $request, $id)
     {
         //
-        $request->build_id = $id;
-        $part = BuildPart::create($request->all());
-        return $part;
+        $buildParts = $request->build_parts;
+
+        $savedParts = collect([]);
+
+        // Iterate through each provided part, store them in build_parts table, push to savedParts collection
+        foreach ($buildParts as $part) {
+            $part['build_id'] = intval($id);
+            $savedPart = BuildPart::create($part);
+            $savedParts->push($savedPart);
+        }
+
+        // return the assembled savedParts collection
+        return $savedParts;
     }
 
     /**
@@ -44,17 +62,28 @@ class BuildPartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $partId)
     {
         //
-        $part = BuildPart::find($id);
+        $part = BuildPart::where('build_id', $id)
+            ->where('id', $partId)
+            ->with([
+                'part:id,part_type_id,manufacturer,product_name', // include part info
+                'part.partType:id,type_short', // include part type info
+                'part.specValues' // include associated part spec values
+            ])
+            ->first();
+
         if (!$part) {
             return response()->json([
                 'error' => 'Build Part not Found',
-                'requested_id' => $id
+                'requested_id' => $partId
             ], 404);
         }
-        return $part;
+
+        $formattedPart = formatPartWithSpecs($part);
+
+        return $formattedPart;
     }
 
     /**
@@ -64,10 +93,13 @@ class BuildPartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $partId)
     {
         //
-        $part = BuildPart::find($id);
+        $part = BuildPart::where('build_id', $id)
+            ->where('id', $partId)
+            ->first();
+
         if (!$part) {
             return response()->json([
                 'error' => 'Build Part not Found',
@@ -75,7 +107,10 @@ class BuildPartController extends Controller
             ], 404);
         }
         $part->update($request->all());
-        return $part;
+
+        // Return an objects that contains the updated part and its relational data
+        $updatedPart = $this->show($id, $partId);
+        return $updatedPart;
     }
 
     /**
@@ -84,17 +119,24 @@ class BuildPartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $partId)
     {
         //
-        $part = BuildPart::find($id);
+        $part = BuildPart::where('build_id', $id)
+            ->where('id', $partId)
+            ->first();
+
         if (!$part) {
             return response()->json([
                 'error' => 'Build Part not Found',
                 'requested_id' => $id
             ], 404);
         }
-        $part->delete($id);
+
+        $part->delete();
+
+        //TODO instead of returning empty 204, perhaps return an updated buildParts array
+
         return response()->json('response content', 204);
     }
 }

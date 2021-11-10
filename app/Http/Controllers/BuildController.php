@@ -46,17 +46,25 @@ class BuildController extends Controller
     {
         //
         $build = Build::with([
-            'parts',
-            'parts.specValues'
+            'buildParts:id,build_id,part_id,description',
+            'buildParts.part:id,part_type_id,manufacturer,product_name',
+            'buildParts.part.partType:id,type_short',
+            'buildParts.part.specValues'
         ])
             ->where('id', $id)
-            ->get();
+            ->first();
 
         if (!$build) {
             return response()->json(['error' => 'Build Not Found', 'requested_id' => $id], 404);
         }
 
-        return response($build);
+        $formattedParts = collect([]);
+        foreach ($build->buildParts as $buildPart) {
+            $formattedPart = formatPartWithSpecs($buildPart);
+            $formattedParts->push($formattedPart);
+        }
+
+        return $formattedParts;
     }
 
     /**

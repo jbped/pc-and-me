@@ -16,6 +16,7 @@ class PartTypeController extends Controller
     {
         //
         $types = PartType::all()->sortBy('type_short');
+
         return $types;
     }
 

@@ -35,11 +35,11 @@ Route::group(['prefix' => 'build'], function () {
     Route::delete('/{id}', [BuildController::class, 'destroy']); // Delete build by id
 
     Route::get('/{id}/part', [BuildPartController::class, 'index']); // Show all parts associated with build
-    Route::post('/{id}/part', [BuildPartController::class, 'store']); // Add new part to build
+    Route::post('/{id}/part', [BuildPartController::class, 'store']); // Add new parts to build
 
-    Route::get('/part/{id}', [BuildPartController::class, 'show']); // Show select build part by id
-    Route::put('/part/{id}', [BuildPartController::class, 'update']); // Update build part by id
-    Route::delete('/part/{id}', [BuildPartController::class, 'destroy']); // Delete build part from build
+    Route::get('/{id}/part/{partId}', [BuildPartController::class, 'show']); // Show select build part by id
+    Route::put('/{id}/part/{partId}', [BuildPartController::class, 'update']); // Update build part by id
+    Route::delete('/{id}/part/{partId}', [BuildPartController::class, 'destroy']); // Delete build part from build
 });
 
 Route::group(['prefix' => 'component'], function () {

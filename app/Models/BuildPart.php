@@ -11,7 +11,7 @@ class BuildPart extends Model
 {
     use HasFactory;
 
-    protected $with = ['part'];
+    // protected $with = ['part'];
 
     protected $fillable = [
         'build_id',

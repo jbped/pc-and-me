@@ -14,6 +14,7 @@ class Part extends Model
     use HasFactory;
 
     // protected $with = ['partType'];
+    public $timestamps = false;
 
     protected $fillable = [
         'part_type_id',

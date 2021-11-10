@@ -18,9 +18,8 @@ class Build extends Model
         'operating_system',
     ];
 
-    public function parts()
+    public function buildParts()
     {
-        $parts = $this->hasManyThrough(Part::class, BuildPart::class);
-        return $parts;
+        return $this->hasMany(BuildPart::class);
     }
 }
