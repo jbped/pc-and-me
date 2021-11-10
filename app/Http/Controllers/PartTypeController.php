@@ -43,17 +43,33 @@ class PartTypeController extends Controller
     {
         //
         $type = PartType::where('type_short', $partType)
-            ->with('parts:id,part_type_id,product_name,manufacturer', 'parts.specValues')
+            ->with([
+                'parts:id,part_type_id,product_name,manufacturer',
+                'parts.specValues'
+            ])
             ->first();
         if (!$type) {
             return response()->json(['error' => 'Type Not Found', 'requested_id' => $partType]);
         }
+
+        $formattedParts = $type->parts->map(function ($part) {
+            $formattedSpecs = collect([]);
+
+            foreach ($part->specValues as $spec) {
+                $formattedSpec = removeNullValues($spec->toArray());
+                $formattedSpecs->push($formattedSpec);
+            }
+
+            $part = collect($part)->replace(['spec_values' => $formattedSpecs]);
+            return $part;
+        });
+
         $collection = collect($type)
+            ->replace(['parts' => $formattedParts])
             ->prepend(
                 count($type->parts),
                 $partType . '-count'
             );
-
         return $collection;
     }
 

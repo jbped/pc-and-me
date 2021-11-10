@@ -58,13 +58,13 @@ class BuildController extends Controller
             return response()->json(['error' => 'Build Not Found', 'requested_id' => $id], 404);
         }
 
-        $formattedParts = collect([]);
-        foreach ($build->buildParts as $buildPart) {
-            $formattedPart = formatPartWithSpecs($buildPart);
-            $formattedParts->push($formattedPart);
-        }
+        $formattedParts = $build->buildParts->map(function ($buildPart) {
+            return formatPartWithSpecs($buildPart);
+        });
 
-        return $formattedParts;
+        $collection = collect($build)->replace(['build_parts' => $formattedParts]);
+
+        return $collection;
     }
 
     /**

@@ -19,12 +19,13 @@ class PartController extends Controller
         $parts = Part::with('partType:id,type_short')
             ->get();
 
-        $mapped = $parts->map(function ($part) {
+        $formattedParts = $parts->map(function ($part) {
+            // return formatPart($part);
             $type = $part->partType->type_short;
             $partType = collect($part);
             return $partType->replace(['part_type' => $type]);
         });
-        return $mapped;
+        return $formattedParts;
     }
 
     /**
@@ -74,13 +75,7 @@ class PartController extends Controller
         }
         $type = $part->partType->type_short;
         $nullRemovedSpecs = $part->specValues->map(function ($spec) {
-            $trimmedSpec = [
-                'part_spec_id' => $spec->part_spec_id,
-                'int_value' => $spec->int_value,
-                'string_value' => $spec->string_value,
-                'text_value' => $spec->text_value,
-                'boolean_value' => $spec->boolean_value
-            ];
+            $trimmedSpec = formatSpec($spec);
             return removeNullValues($trimmedSpec);
         });
         $collection = collect($part)->replace(['part_type' => $type, 'spec_values' => $nullRemovedSpecs]);

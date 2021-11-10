@@ -47,7 +47,7 @@ class BuildPartController extends Controller
 
         // Iterate through each provided part, store them in build_parts table, push to savedParts collection
         foreach ($buildParts as $part) {
-            $part['build_id'] = intval($id);
+            $part['build_id'] = $id;
             $savedPart = BuildPart::create($part);
             $savedParts->push($savedPart);
         }

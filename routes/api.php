@@ -53,7 +53,6 @@ Route::group(['prefix' => 'component'], function () {
     Route::get('/single/{id}', [PartController::class, 'show']); // Show part by id
     Route::put('/single/{id}', [PartController::class, 'update']); // Update part by id
     Route::delete('/single/{id}', [PartController::class, 'destroy']); // Delete part by id
-
 });
 
 Route::group(['prefix' => 'spec'], function () {
