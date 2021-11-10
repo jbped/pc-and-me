@@ -78,7 +78,7 @@ class PartController extends Controller
             $trimmedSpec = formatSpec($spec);
             return removeNullValues($trimmedSpec);
         });
-        $collection = collect($part)->replace(['part_type' => $type, 'spec_values' => $nullRemovedSpecs]);
+        $collection = collect($part)->replace(['part_type' => $type, 'spec_values' => $nullRemovedSpecs], 404);
 
         return $collection;
     }

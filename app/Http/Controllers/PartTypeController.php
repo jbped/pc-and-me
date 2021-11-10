@@ -49,7 +49,7 @@ class PartTypeController extends Controller
             ])
             ->first();
         if (!$type) {
-            return response()->json(['error' => 'Type Not Found', 'requested_id' => $partType]);
+            return response()->json(['error' => 'Type Not Found', 'requested_id' => $partType], 404);
         }
 
         $formattedParts = $type->parts->map(function ($part) {
@@ -78,9 +78,12 @@ class PartTypeController extends Controller
      */
     public function getSpecTypes($partType)
     {
-        $type = PartType::with('typeSpecs')->where('type_short', $partType)->get();
+        $type = PartType::with('typeSpecs:id,part_type_id,name,data_type,details')
+            ->where('type_short', $partType)
+            ->first();
+
         if (!$type) {
-            return response()->json(['error' => 'Type Not Found', 'requested_id' => $type]);
+            return response()->json(['error' => 'Type Not Found', 'requested_id' => $type], 404);
         }
 
         return $type;

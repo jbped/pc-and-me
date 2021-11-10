@@ -11,7 +11,7 @@ class PartSpec extends Model
 {
     use HasFactory;
 
-    protected $with = ['partType'];
+    // protected $with = ['partType'];
 
     protected $fillable = [
         'part_type_id',

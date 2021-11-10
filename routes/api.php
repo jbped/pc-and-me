@@ -57,11 +57,14 @@ Route::group(['prefix' => 'component'], function () {
 
 Route::group(['prefix' => 'spec'], function () {
     Route::get('/', [PartSpecController::class, 'index']); // Get all spec types
-    Route::get('/{partType}', [PartTypeController::class, 'show']); // Get all spec types of provided part type
+    Route::get('/{partType}', [PartTypeController::class, 'getSpecTypes']); // Get all spec types of provided part type
     Route::post('/{partType}', [PartSpecController::class, 'store']); // Create new spec type for provided part type
 
-    Route::get('/{partType}/{specType}', [PartSpecValueController::class, 'show']); // Get all spec values for provided part->spec type
-    Route::post('/{partType}/{specType}', [PartSpecValueController::class, 'store']); // Create new spec value
+    Route::get('/type/{id}', [PartSpecController::class, 'show']); // Get all spec values for provided part->spec type
+    Route::post('/type/{id}', [PartSpecValueController::class, 'store']); // Create new spec value
 
+    Route::get('/value/{id}', [PartSpecValueController::class, 'show']); // Get spec values by id
+    Route::put('/value/{id}', [PartSpecValueController::class, 'update']); // Update spec values by id
+    Route::delete('/value/{id}', [PartSpecValueController::class, 'destroy']); // Delete spec values by id
 
 });

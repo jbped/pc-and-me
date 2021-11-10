@@ -28,6 +28,7 @@ class PartSpecValue extends Model
         return $this->belongsTo(Part::class);
     }
 
+    // FIXME returning null results
     public function spec()
     {
         return $this->belongsTo(PartSpec::class);

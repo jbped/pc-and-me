@@ -16,9 +16,11 @@ class CreatePartSpecValuesTable extends Migration
         Schema::create('part_spec_values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('part_id')
-                ->constrained();
+                ->constrained()
+                ->onDelete('cascade');
             $table->foreignId('part_spec_id')
-                ->constrained();
+                ->constrained()
+                ->onDelete('cascade');
             $table->integer('int_value')
                 ->nullable();
             $table->string('string_value')
