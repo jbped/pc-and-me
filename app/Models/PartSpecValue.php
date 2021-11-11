@@ -31,6 +31,6 @@ class PartSpecValue extends Model
     // FIXME returning null results
     public function spec()
     {
-        return $this->belongsTo(PartSpec::class);
+        return $this->belongsTo('App\Models\PartSpec', 'part_spec_id', 'id');
     }
 }

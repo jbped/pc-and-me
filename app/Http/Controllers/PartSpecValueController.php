@@ -63,8 +63,8 @@ class PartSpecValueController extends Controller
         //
         $spec = PartSpecValue::with([
             'part:id,part_type_id,manufacturer,product_name',
-            'part.partType',
-            'spec'
+            'part.partType:id,type_short',
+            'spec:id,'
         ])
             ->where('id', $id)
             ->first();
