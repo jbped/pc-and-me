@@ -1,11 +1,11 @@
 const routes = [
     {
-        path: "",
+        path: "/",
         component: () => import("../Pages/home.vue"),
         name: "home",
     },
     {
-        path: "new-build",
+        path: "/new-build",
         component: () => import("../Pages/newBuild.vue"),
         name: "new-build",
     },
