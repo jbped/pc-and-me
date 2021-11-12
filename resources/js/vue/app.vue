@@ -1,16 +1,18 @@
 <template>
     <v-app>
-        <navbar></navbar>
-        <div style="height: 200vh"></div>
+        <headerComponent></headerComponent>
+        <v-main>
+            <router-view />
+        </v-main>
     </v-app>
 </template>
 
 <script>
-import navbar from "./Components/navbar.vue";
+import headerComponent from "./Components/header.vue";
 
 export default {
     name: "app",
-    components: { navbar },
+    components: { headerComponent },
 };
 </script>
 
