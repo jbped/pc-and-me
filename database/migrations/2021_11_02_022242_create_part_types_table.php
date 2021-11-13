@@ -17,6 +17,7 @@ class CreatePartTypesTable extends Migration
             $table->id();
             $table->string('type_short', 8)->unique(); // Ex. GPU
             $table->string('type_long', 50); // Ex. Graphics Processing Unit or Graphics Card
+            $table->string('friendly_name', 20)->nullable();
             $table->string('descriptor');
             $table->timestamps();
         });

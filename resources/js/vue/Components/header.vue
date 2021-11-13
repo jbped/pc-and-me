@@ -10,15 +10,19 @@
             :style="{ top: $vuetify.application.top + 'px', zIndex: 4 }"
         >
             <v-list dense nav>
-                <v-list-item v-for="item in items" :key="item.title" link>
-                    <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-item-icon>
+                <v-list-item-group v-model="model">
+                    <v-list-item v-for="item in items" :key="item.title" link>
+                        <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
 
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                        <v-list-item-content>
+                            <v-list-item-title
+                                v-text="item.title"
+                            ></v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
         <v-app-bar dense app clipped-left>
@@ -36,6 +40,7 @@ export default {
     data() {
         return {
             drawer: null,
+            model: 1,
             items: [
                 { title: "Home", icon: "mdi-home-variant", link: "/" },
                 { title: "Builds", icon: "mdi-desktop-tower", link: "/builds" },

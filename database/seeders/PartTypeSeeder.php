@@ -19,12 +19,12 @@ class PartTypeSeeder extends Seeder
             [
                 'type_short' => 'case',
                 'type_long' => 'Computer Case',
-                'descriptor' => 'Computer Case'
+                'descriptor' => 'Case',
             ],
             [
                 'type_short' => 'cooler',
                 'type_long' => 'CPU Cooler',
-                'descriptor' => 'CPU Cooler (Air Cooler, AIO, Custom liquid cooling)'
+                'descriptor' => 'Cooler'
             ],
             [
                 'type_short' => 'cpu',
@@ -34,7 +34,7 @@ class PartTypeSeeder extends Seeder
             [
                 'type_short' => 'gpu',
                 'type_long' => 'Graphics Processing Unit',
-                'descriptor' => 'Graphics/Video Card'
+                'descriptor' => 'Graphics Card'
             ],
             [
                 'type_short' => 'mobo',
@@ -54,7 +54,7 @@ class PartTypeSeeder extends Seeder
             [
                 'type_short' => 'storage',
                 'type_long' => 'Computer Storage',
-                'descriptor' => 'Computer Storage (HDD/SSD)'
+                'descriptor' => 'Storage'
             ],
         ], ['type_short'], ['type_long']);
     }
