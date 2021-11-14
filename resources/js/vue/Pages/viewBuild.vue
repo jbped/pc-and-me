@@ -23,11 +23,9 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col>
+                <v-col class="col-12 py-0">
                     <p class="text-h5 primary--text mb-0">Parts</p>
                 </v-col>
-            </v-row>
-            <v-row>
                 <v-col
                     class="col-12 col-lg-6 col-xl-4"
                     v-for="(type, i) in Object.keys(parts)"
