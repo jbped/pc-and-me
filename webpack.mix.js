@@ -4,6 +4,7 @@ const VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
 
 const webpackConfig = {
     plugins: [new VuetifyLoaderPlugin()],
+    stats: { children: true },
 };
 
 mix.webpackConfig(webpackConfig);
@@ -21,4 +22,4 @@ mix.webpackConfig(webpackConfig);
 
 mix.js("resources/js/app.js", "public/js")
     .vue()
-    .postCss("resources/css/app.css", "public/css", [require("css-loader")]);
+    .postCss("resources/css/app.css", "public/css", []);

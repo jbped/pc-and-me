@@ -8,5 +8,12 @@ Vue.use(Vuetify);
 export default new Vuetify({
     theme: {
         dark: true,
+        themes: {
+            dark: {
+                anchor: "#FFF",
+                primary: "#2DD881",
+                secondary: "#20A4F3",
+            },
+        },
     },
 });

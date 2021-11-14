@@ -12,15 +12,23 @@
             <v-list dense nav>
                 <v-list-item-group v-model="model">
                     <v-list-item v-for="item in items" :key="item.title" link>
-                        <v-list-item-icon>
-                            <v-icon>{{ item.icon }}</v-icon>
-                        </v-list-item-icon>
+                        <router-link
+                            :to="{ name: item.name }"
+                            style="text-decoration: none"
+                            class="d-flex"
+                        >
+                            <v-list-item-icon>
+                                <v-icon class="secondary--text">{{
+                                    item.icon
+                                }}</v-icon>
+                            </v-list-item-icon>
 
-                        <v-list-item-content>
-                            <v-list-item-title
-                                v-text="item.title"
-                            ></v-list-item-title>
-                        </v-list-item-content>
+                            <v-list-item-content>
+                                <v-list-item-title
+                                    v-text="item.title"
+                                ></v-list-item-title>
+                            </v-list-item-content>
+                        </router-link>
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -30,7 +38,9 @@
                 class="hidden-md-and-up"
                 @click.stop="drawer = !drawer"
             ></v-app-bar-nav-icon>
-            <v-toolbar-title>PC and Me</v-toolbar-title>
+            <v-toolbar-title class="primary--text text-h5 font-weight-bold"
+                >PC and Me</v-toolbar-title
+            >
         </v-app-bar>
     </div>
 </template>
@@ -42,13 +52,17 @@ export default {
             drawer: null,
             model: 1,
             items: [
-                { title: "Home", icon: "mdi-home-variant", link: "/" },
-                { title: "Builds", icon: "mdi-desktop-tower", link: "/builds" },
-                { title: "Parts", icon: "mdi-grid-large", link: "/parts" },
+                { title: "Home", icon: "mdi-home-variant", name: "HomePage" },
+                {
+                    title: "Builds",
+                    icon: "mdi-desktop-tower",
+                    name: "BuildList",
+                },
+                { title: "Parts", icon: "mdi-grid-large", name: "PartsList" },
                 {
                     title: "Create a Build",
                     icon: "mdi-plus",
-                    link: "/new-build",
+                    name: "NewBuild",
                 },
             ],
             active: "Home",
@@ -57,4 +71,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>
