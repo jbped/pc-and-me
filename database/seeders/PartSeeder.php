@@ -44,7 +44,7 @@ class PartSeeder extends Seeder
             ],
             [
                 'part_type_id' => 1,
-                'manufacturer' => 'Fractal',
+                'manufacturer' => 'Fractal Design',
                 'product_name' => 'Meshify C Mini'
             ],
             [

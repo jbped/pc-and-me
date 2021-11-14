@@ -48,7 +48,7 @@ class BuildController extends Controller
         $build = Build::with([
             'buildParts:id,build_id,part_id,description',
             'buildParts.part:id,part_type_id,manufacturer,product_name',
-            'buildParts.part.partType:id,type_short',
+            'buildParts.part.partType:id,type_short,descriptor',
             'buildParts.part.specValues'
         ])
             ->where('id', $id)

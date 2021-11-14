@@ -19,6 +19,7 @@ class CreatePartSpecsTable extends Migration
                 ->constrained();
             $table->string('name');
             $table->string('data_type'); // integer, string, text, boolean
+            $table->string('unit_type')->nullable(); // mm, Mhz, Ghz, etc
             $table->string('details') // Help text to better understand the spec
                 ->nullable();
             $table->timestamps();

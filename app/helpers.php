@@ -17,7 +17,8 @@ function formatSpec(object $spec)
         'int_value' => $spec->int_value,
         'string_value' => $spec->string_value,
         'text_value' => $spec->text_value,
-        'boolean_value' => $spec->boolean_value
+        'boolean_value' => $spec->boolean_value,
+        'spec' => $spec->spec,
     ];
 }
 
@@ -45,9 +46,11 @@ function formatPartWithSpecs(object $data)
         'part_id' => $data->part_id,
         'description' => $data->description,
         'part_type' => $data->part->partType->type_short,
-        'manufacturer' => $data->part->partType->manufacturer,
-        'product_name' => $data->part->partType->product_name,
+        'descriptor' => $data->part->partType->descriptor,
+        'manufacturer' => $data->part->manufacturer,
+        'product_name' => $data->part->product_name,
         'spec_values' => $nullRemovedSpecs
+        // 'spec_values' => $data->part->specValues
     ];
     return $formattedPart;
 }
@@ -72,6 +75,7 @@ function formatPart(object $data)
         'part_id' => $data->part_id,
         'description' => $data->description,
         'part_type' => $data->part->partType->type_short,
+        'descriptor' => $data->part->partType->descriptor,
         'manufacturer' => $data->part->partType->manufacturer,
         'product_name' => $data->part->partType->product_name
     ];
