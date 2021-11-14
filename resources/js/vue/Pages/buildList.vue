@@ -70,7 +70,6 @@ export default {
                 .get("/api/build")
                 .then((response) => {
                     this.buildList = response.data;
-                    console.log(response.data);
                 })
                 .catch((error) => console.log(error));
         },

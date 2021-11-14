@@ -4,14 +4,14 @@
             v-model="drawer"
             app
             clipped
-            absolute
+            fixed
             dark
             :permanent="$vuetify.breakpoint.mdAndUp"
             :style="{ top: $vuetify.application.top + 'px', zIndex: 4 }"
         >
             <v-list dense nav>
                 <v-list-item-group>
-                    <v-list-item v-for="item in items" :key="item.title" link>
+                    <v-list-item v-for="item in items" :key="item.title">
                         <router-link
                             :to="{ name: item.name }"
                             style="text-decoration: none"
@@ -38,9 +38,15 @@
                 class="hidden-md-and-up"
                 @click.stop="drawer = !drawer"
             ></v-app-bar-nav-icon>
-            <v-toolbar-title class="primary--text text-h5 font-weight-bold"
-                >PC and Me</v-toolbar-title
+            <router-link
+                :to="{ name: 'HomePage' }"
+                style="text-decoration: none"
+                class="d-flex"
             >
+                <v-toolbar-title class="primary--text text-h5 font-weight-bold"
+                    >PC and Me</v-toolbar-title
+                >
+            </router-link>
         </v-app-bar>
     </div>
 </template>

@@ -2,8 +2,8 @@ require("./bootstrap");
 window.Vue = require("vue");
 
 import Vue from "vue";
-import vuetify from "./vuetify";
 import VueRouter from "vue-router";
+import vuetify from "./vuetify";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
