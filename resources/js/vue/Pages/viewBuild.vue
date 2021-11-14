@@ -1,5 +1,5 @@
 <template>
-    <div v-if="buildDetails === 0">
+    <div v-if="Object.keys(buildDetails).length === 0">
         <buildSkeleton></buildSkeleton>
     </div>
     <div v-else>

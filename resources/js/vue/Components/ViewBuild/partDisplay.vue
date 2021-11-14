@@ -6,7 +6,7 @@
         <v-divider></v-divider>
         <div v-for="(part, i) in parts[type].list" :key="i">
             <p class="mt-3 mb-1">
-                {{ part.producnt_ame }}
+                {{ part.product_name }}
                 by
                 {{ part.manufacturer }}
             </p>

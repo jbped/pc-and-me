@@ -10,7 +10,7 @@
             :style="{ top: $vuetify.application.top + 'px', zIndex: 4 }"
         >
             <v-list dense nav>
-                <v-list-item-group v-model="model">
+                <v-list-item-group>
                     <v-list-item v-for="item in items" :key="item.title" link>
                         <router-link
                             :to="{ name: item.name }"
@@ -50,7 +50,7 @@ export default {
     data() {
         return {
             drawer: null,
-            model: 1,
+            // model: 1,
             items: [
                 { title: "Home", icon: "mdi-home-variant", name: "HomePage" },
                 {
