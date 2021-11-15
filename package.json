@@ -30,5 +30,8 @@
         "vue-axios": "^3.4.0",
         "vuetify": "^2.5.14",
         "vuetify-loader": "^1.7.3"
+    },
+    "engines": {
+        "node": "v14.17.0"
     }
 }
