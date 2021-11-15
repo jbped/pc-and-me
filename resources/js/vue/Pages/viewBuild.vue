@@ -3,7 +3,12 @@
         <buildSkeleton></buildSkeleton>
     </div>
     <div v-else>
-        <p class="text-h4 secondary--text mb-0">{{ buildDetails.name }}</p>
+        <p class="text-h4 secondary--text mb-0">
+            {{ buildDetails.name }}
+            <v-btn elevation="2" color="primary" icon @click="editBuild">
+                <v-icon>mdi-pencil-outline</v-icon>
+            </v-btn>
+        </p>
         <p class="text-subtitle grey--text darker-3-text mb-0">
             Created: {{ convertDate(buildDetails.created_at) }}
         </p>
@@ -115,6 +120,12 @@ export default {
                     }
                 });
             }
+        },
+        editBuild() {
+            this.$router.push({
+                name: "EditBuild",
+                params: { id: this.$route.params.id },
+            });
         },
     },
     created() {

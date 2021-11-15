@@ -24,6 +24,11 @@ const routes = [
         component: () => import("../Pages/viewBuild.vue"),
         name: "ViewBuild",
     },
+    {
+        path: "/build/:id/edit",
+        component: () => import("../Pages/editBuild.vue"),
+        name: "EditBuild",
+    },
 ];
 
 export default routes;
