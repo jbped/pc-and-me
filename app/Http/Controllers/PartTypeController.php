@@ -45,7 +45,8 @@ class PartTypeController extends Controller
         $type = PartType::where('type_short', $partType)
             ->with([
                 'parts:id,part_type_id,product_name,manufacturer',
-                'parts.specValues'
+                'parts.specValues',
+                'parts.specValues.spec',
             ])
             ->first();
         if (!$type) {
@@ -68,7 +69,7 @@ class PartTypeController extends Controller
             ->replace(['parts' => $formattedParts])
             ->prepend(
                 count($type->parts),
-                $partType . '-count'
+                'count'
             );
         return $collection;
     }

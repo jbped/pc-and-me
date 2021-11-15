@@ -9,9 +9,12 @@
                         <p class="text-h5">About</p>
                         <v-sheet width="100%" class="pa-4">
                             <v-text-field
+                                v-model="buildname"
                                 label="Build Name"
                                 name="build-name"
+                                :rules="buildNameRules"
                                 filled
+                                required
                             ></v-text-field>
                             <v-textarea
                                 filled
@@ -43,6 +46,15 @@
                                 :key="index"
                                 elevation="3"
                                 class="my-4"
+                                @click.stop="
+                                    {
+                                        (modal = true),
+                                            (selectedType = {
+                                                typeShort: type.type_short,
+                                                typeLong: type.type_long,
+                                            });
+                                    }
+                                "
                             >
                                 <v-card-title>
                                     {{ type.descriptor }}
@@ -53,18 +65,24 @@
                 </v-row>
             </v-form>
         </v-container>
+        <partModal v-model="modal" :partType="selectedType"></partModal>
     </div>
 </template>
 
 <script>
 import skeletonPartType from "../Components/NewBuild/skeletonPartType.vue";
+import partModal from "../Components/NewBuild/partModal.vue";
 export default {
-    components: { skeletonPartType },
+    components: { skeletonPartType, partModal },
     data: () => ({
+        buildname: "",
+        buildNameRules: [(v) => !!v || "Build Name is required"],
         descriptionRules: [(v) => v.length <= 255 || "255 Character Maximum"],
         descriptionValue: "",
         partTypes: [],
         buildParts: [],
+        modal: false,
+        selectedType: {},
     }),
     methods: {
         getPartTypeList() {

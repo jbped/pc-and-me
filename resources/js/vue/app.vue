@@ -1,8 +1,10 @@
 <template>
     <v-app>
         <headerComponent></headerComponent>
-        <v-main class="mx-4 mx-lg-8 mx-xl-14 mt-3 mt-lg-6">
-            <router-view />
+        <v-main>
+            <v-container fluid>
+                <router-view> </router-view>
+            </v-container>
         </v-main>
     </v-app>
 </template>
